@@ -24,6 +24,10 @@
 }
 /* Botão de Add */
 
+#add-link{
+    text-decoration: none;
+}
+
 .add-div {
     background-color: blue;
     cursor: pointer;

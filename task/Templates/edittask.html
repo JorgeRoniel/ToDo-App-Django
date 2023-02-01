@@ -1,0 +1,11 @@
+{% extends 'model-page.html' %}
+
+{% block content %}
+    <div class="offset-1 col-10  list-div">
+        <h1>Editando '{{task.titulo}}'</h1>
+        <form method="POST"> {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-success" value="editar tarefa">
+        </form>
+    </div>
+{% endblock %}
