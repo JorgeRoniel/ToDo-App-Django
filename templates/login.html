@@ -1,0 +1,30 @@
+{% extends 'model-page.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card auth-card">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Bem-Vindo ao ToDo App</h4>
+
+                    <form action="submit" method="POST"> {% csrf_token %}
+                        <label>Usuário:</label>
+                        <input type="text" name="usuario" id="user">
+                        <br>
+                        <label>Senha:</label>
+                        <input type="password" name="senha" id="pass">
+                        <br>
+                        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                        <br>
+                    </form>
+
+                    {% for message in messages %}
+                        <div align="center">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

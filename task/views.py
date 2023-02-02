@@ -2,8 +2,10 @@ from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from .models import Tarefa
 from .forms import Taskform
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/login/')
 def tasksList(request):
 
     search = request.GET.get('search')
@@ -18,11 +20,12 @@ def tasksList(request):
         tasks = paginator.get_page(page)
 
     return render(request, 'lista.html', {'tasks': tasks})
-
+@login_required(login_url='/login/')
 def taskView(request, id):
     task = get_object_or_404(Tarefa, pk=id)
     return render(request, 'tasks.html', {'task': task})
 
+@login_required(login_url='/login/')
 def newTask(request):
     if request.method == 'POST':
         form = Taskform(request.POST)
@@ -35,6 +38,7 @@ def newTask(request):
         form = Taskform()
         return render(request, 'addtask.html', {'form':form})
 
+@login_required(login_url='/login/')
 def editTask(request, id):
     task = get_object_or_404(Tarefa, pk=id)
     form = Taskform(instance=task)
@@ -50,6 +54,7 @@ def editTask(request, id):
     else:
         return render(request, 'edittask.html', {'form': form, 'task': task})
 
+@login_required(login_url='/login/')
 def deleteTask(request, id):
     task = get_object_or_404(Tarefa, pk=id)
     task.delete()

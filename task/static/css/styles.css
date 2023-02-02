@@ -125,3 +125,23 @@ footer p {
     margin-left: 5px;
     margin-right: 5px;
 }
+
+/* Login */
+
+.auth-card{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#user {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    aling: center;
+}
+
+#pass {
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
