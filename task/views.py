@@ -1,10 +1,22 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from .models import Tarefa
 from .forms import Taskform
+from django.core.paginator import Paginator
 
 # Create your views here.
 def tasksList(request):
-    tasks = Tarefa.objects.all().order_by('-data_criacao')
+
+    search = request.GET.get('search')
+    if search:
+        tasks = Tarefa.objects.filter(titulo__icontains=search)
+    else:
+
+        tasks_list = Tarefa.objects.all().order_by('-data_criacao')
+
+        paginator = Paginator(tasks_list, 2)
+        page = request.GET.get('page')
+        tasks = paginator.get_page(page)
+
     return render(request, 'lista.html', {'tasks': tasks})
 
 def taskView(request, id):
