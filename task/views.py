@@ -7,13 +7,13 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required(login_url='/login/')
 def tasksList(request):
-
+    usuario = request.user
     search = request.GET.get('search')
     if search:
-        tasks = Tarefa.objects.filter(titulo__icontains=search)
+        tasks = Tarefa.objects.filter(usuario=usuario, titulo__icontains=search)
     else:
 
-        tasks_list = Tarefa.objects.all().order_by('-data_criacao')
+        tasks_list = Tarefa.objects.filter(usuario=usuario).order_by('-data_criacao')
 
         paginator = Paginator(tasks_list, 2)
         page = request.GET.get('page')

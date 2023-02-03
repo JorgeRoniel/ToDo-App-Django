@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Tarefa(models.Model):
@@ -11,3 +12,4 @@ class Tarefa(models.Model):
     done = models.CharField(max_length=5, choices=STATUS)
     data_criacao = models.DateTimeField(auto_now_add=True)
     data_update = models.DateTimeField(auto_now=True)
+    usuario = models.ForeignKey(User, null=True, blank=True , on_delete=models.CASCADE)
