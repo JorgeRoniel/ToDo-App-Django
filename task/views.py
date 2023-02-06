@@ -9,8 +9,12 @@ from django.contrib.auth.decorators import login_required
 def tasksList(request):
     usuario = request.user
     search = request.GET.get('search')
+    filtro = request.GET.get('filter')
+
     if search:
         tasks = Tarefa.objects.filter(usuario=usuario, titulo__icontains=search)
+    elif filtro:
+        tasks = Tarefa.objects.filter(usuario=usuario, done=filtro)
     else:
 
         tasks_list = Tarefa.objects.filter(usuario=usuario).order_by('-data_criacao')
@@ -32,6 +36,7 @@ def newTask(request):
         if form.is_valid():
             task = form.save(commit=False)
             task.done = 'doing'
+            task.usuario = request.user
             task.save()
             return redirect('/')
     else:
@@ -58,4 +63,16 @@ def editTask(request, id):
 def deleteTask(request, id):
     task = get_object_or_404(Tarefa, pk=id)
     task.delete()
+    return redirect('/')
+
+@login_required(login_url='/login/')
+def change_status(request, id):
+    task = get_object_or_404(Tarefa, pk=id)
+
+    if task.done == 'doing':
+        task.done = 'done'
+    else:
+        task.done = 'doing'
+
+    task.save()
     return redirect('/')
