@@ -1,18 +1,27 @@
-deleteBtn = document.getElementById('deleteBtn')
-searchBtn = document.getElementById('search-btn')
-searchForm = document.getElementById('search-form')
+$(document).ready(function(){
+    var baseUrl = 'http://127.0.0.1:8000'
+    var deleteBtn = $('#deleteBtn')
+    var searchBtn = $('#search-btn')
+    var searchForm = $('#search-form')
+    var filter = $('#filter')
 
-deleteBtn.onclick = function(e){
-    e.preventDefault();
+    $(deleteBtn).on('click', function(e){
+        e.preventDefault()
 
-    var delLink = this.getAttribute('href');
-    var confirmacao = confirm('Voce deseja mesmo apagar essa tarefa?');
+        var delLink = $(this).attr('href')
+        var resultado = confirm('Deseja deletar essa tarefa?')
 
-    if(confirmacao){
-        window.location.href = delLink;
-    }
-}
+        if(resultado){
+            window.location.href = delLink;
+        }
+    })
 
-searchBtn.onclick = function(){
-    searchForm.submit();
-}
+    $(searchBtn).on('click', function(){
+        searchForm.submit()
+    })
+
+    $(filter).change(function(){
+        var filtro = $(this).val()
+        window.location.href = baseUrl + '?filter=' + filtro
+    })
+})

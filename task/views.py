@@ -19,7 +19,7 @@ def tasksList(request):
 
         tasks_list = Tarefa.objects.filter(usuario=usuario).order_by('-data_criacao')
 
-        paginator = Paginator(tasks_list, 2)
+        paginator = Paginator(tasks_list, 3)
         page = request.GET.get('page')
         tasks = paginator.get_page(page)
 
