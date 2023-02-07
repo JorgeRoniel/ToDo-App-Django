@@ -175,3 +175,27 @@ footer p {
     margin-bottom: 20px;
     margin-right: 10px;
 }
+
+/* Sobre */
+
+.social-list{
+    list-style: none;
+}
+
+.social-itens{
+    display: inline;
+}
+
+.fa-brands.fa-square-github, .fa-brands.fa-square-instagram, .fa-brands.fa-linkedin{
+    cursor: pointer;
+    margin: 5px;
+    font-size: 30px;
+}
+
+.fa-brands.fa-square-github{
+    color: #2F4F4F;
+}
+
+.fa-brands.fa-square-instagram{
+    color: #FF4500;
+}
